@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Path of the CSV file
-datapath = r"C:\Users\abram\Downloads\GTF Technical Test\csvtojson\driver_registration.csv"
+datapath = r"C:/Users/AbramBhanuaji/Documents/GitHub/python-gtf/csvtojson/driver_registration.csv"
 
 # Assign column names to the data and read the CSV file
 colnames = ['id', 'date_created', 'date_last_modified', 'active_date', 'name', 'phone', 'resign_date', 'resign_reason', 'status', 'tipe', 'area', 'operator', 'modified_by', 'vehicle_type', 'helmet_qty', 'jacket_qty', 'vehicle_brand', 'vehicle_year', 'bike_type', 'first_ride_bonus_awarded', 'is_doc_completed']
@@ -34,10 +34,10 @@ driverreg = {}
 i = 0
 while i < len(id):
     driverreg[id[i]] = [
-        id[i],
-        date_created[i],
-        date_last_modified[i],
-        active_date[i],
+        {"id": id[i],},
+        {"date_created": date_created[i],}
+        {"date_last_modified": date_last_modified[i],}
+        {"active_date": active_date[i],}
         name[i],
         phone[i],
         resign_date[i],
