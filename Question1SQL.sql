@@ -122,3 +122,26 @@ FROM (
   ORDER BY order_type DESC
 )
 GROUP BY detail.order_type
+
+--TRIAL AND ERROR LINES END HERE-----------------------------------------------------------------------
+--TRIAL AND ERROR LINES END HERE-----------------------------------------------------------------------
+--TRIAL AND ERROR LINES END HERE-----------------------------------------------------------------------
+--TRIAL AND ERROR LINES END HERE-----------------------------------------------------------------------
+--TRIAL AND ERROR LINES END HERE-----------------------------------------------------------------------
+--TRIAL AND ERROR LINES END HERE-----------------------------------------------------------------------
+--TRIAL AND ERROR LINES END HERE-----------------------------------------------------------------------
+--TRIAL AND ERROR LINES END HERE-----------------------------------------------------------------------
+--TRIAL AND ERROR LINES END HERE-----------------------------------------------------------------------
+
+CREATE OR REPLACE TABLE `bi-dwhdev-01.ab_dwh.daily_order` AS(
+  SELECT
+  customer_no,
+  order_status,
+  [
+    STRUCT(order_payment, order_type, EXTRACT(DATE FROM order_time AT TIME ZONE 'Asia/Jakarta') AS order_date)
+  ] AS detail,
+FROM `bi-dwhdev-01.source.daily_order`
+WHERE UPPER(order_status) = 'COMPLETED'
+GROUP BY customer_no, order_payment, order_type, order_time, order_status
+ORDER BY customer_no ASC, order_payment, order_type, order_time DESC, order_status
+);
